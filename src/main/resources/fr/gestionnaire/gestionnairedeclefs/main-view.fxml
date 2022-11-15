@@ -27,7 +27,7 @@
    </HBox>
    <TableView prefHeight="200.0" prefWidth="200.0">
       <columns>
-         <TableColumn prefWidth="75.0" text="Numéro" />
+         <TableColumn fx:id="colNum" prefWidth="75.0" text="Numéro" />
          <TableColumn prefWidth="75.0" text="Couleur" />
          <TableColumn prefWidth="75.0" text="Description" />
       </columns>

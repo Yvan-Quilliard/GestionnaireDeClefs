@@ -1,5 +1,6 @@
 package fr.gestionnaire.gestionnairedeclefs;
 
+import fr.gestionnaire.gestionnairedeclefs.model.Clef;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
