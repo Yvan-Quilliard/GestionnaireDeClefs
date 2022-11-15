@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gestionnaire.gestionnairedeclefs.MainController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <HBox>
+      <children>
+         <TextField promptText="Numéro de clef, etc..." style="-fx-border-color: blue;">
+            <HBox.margin>
+               <Insets right="5.0" />
+            </HBox.margin></TextField>
+         <Button mnemonicParsing="false" style="-fx-background-color: blue;" text="Rechercher" textFill="WHITE">
+            <HBox.margin>
+               <Insets right="5.0" />
+            </HBox.margin></Button>
+         <Button mnemonicParsing="false" style="-fx-background-color: green;" text="Ajouter une clef" textFill="WHITE" />
+         <Button mnemonicParsing="false" style="-fx-background-color: red;" text="Supprimer la clef" textFill="WHITE">
+            <HBox.margin>
+               <Insets left="5.0" />
+            </HBox.margin></Button>
+      </children>
+   </HBox>
+   <TableView prefHeight="200.0" prefWidth="200.0">
+      <columns>
+         <TableColumn prefWidth="75.0" text="Numéro" />
+         <TableColumn prefWidth="75.0" text="Couleur" />
+         <TableColumn prefWidth="75.0" text="Description" />
+      </columns>
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
+   </TableView>
+</VBox>

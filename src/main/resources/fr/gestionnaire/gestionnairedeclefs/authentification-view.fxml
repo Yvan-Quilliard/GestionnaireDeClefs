@@ -12,5 +12,5 @@
    <TextField fx:id="tfLogin" />
    <Label text="Mot de passe" />
    <PasswordField fx:id="pfPassword" />
-    <Button fx:id="btnConnexion" onAction="#onClickBtnConnexion" onZoomFinished="#onClickBtnConnexion" text="Connexion" />
+    <Button fx:id="btnConnexion" onAction="#onClickBtnConnexion" text="Connexion" />
 </VBox>
