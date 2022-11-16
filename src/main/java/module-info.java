@@ -8,4 +8,6 @@ module fr.gestionnaire.gestionnairedeclefs {
 
     exports fr.gestionnaire.gestionnairedeclefs;
     exports fr.gestionnaire.gestionnairedeclefs.model;
+    exports fr.gestionnaire.gestionnairedeclefs.controller;
+    opens fr.gestionnaire.gestionnairedeclefs.controller to javafx.fxml;
 }

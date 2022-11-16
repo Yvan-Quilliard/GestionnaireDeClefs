@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gestionnaire.gestionnairedeclefs.MainController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.gestionnaire.gestionnairedeclefs.controller.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -18,16 +18,16 @@
             <HBox.margin>
                <Insets right="5.0" />
             </HBox.margin></Button>
-         <Button mnemonicParsing="false" onAction="#onClickBtnAddClef" style="-fx-background-color: green;" text="Ajouter une clef" textFill="WHITE" />
+         <Button fx:id="btnAddClef" mnemonicParsing="false" onAction="#onClickBtnAddClef" style="-fx-background-color: green;" text="Ajouter une clef" textFill="WHITE" />
          <Button mnemonicParsing="false" onAction="#onClickBtnDeleteClef" style="-fx-background-color: red;" text="Supprimer la clef" textFill="WHITE">
             <HBox.margin>
                <Insets left="5.0" />
             </HBox.margin></Button>
       </children>
    </HBox>
-   <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+   <TableView fx:id="table">
       <columns>
-         <TableColumn fx:id="colNumber" prefWidth="75.0" text="Numéro" />
+         <TableColumn fx:id="colNumber" prefWidth="-1.0" text="Numéro" />
          <TableColumn fx:id="colColor" prefWidth="75.0" text="Couleur" />
          <TableColumn fx:id="colDescription" prefWidth="75.0" text="Description" />
       </columns>

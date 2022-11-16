@@ -25,6 +25,9 @@ public class Clef implements MethodeDatabaseObject<Clef> {
         this.color = new SimpleStringProperty(color);
         this.description = new SimpleStringProperty(description);
     }
+    public Clef(int number, String color, String description) {
+        this(0, number, color, description);
+    }
 
     @Override
     public List<Clef> getAll(Connection connection) throws SQLException {

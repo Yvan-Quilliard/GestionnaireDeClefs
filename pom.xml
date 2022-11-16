@@ -71,7 +71,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                fr.gestionnaire.gestionnairedeclefs/fr.gestionnaire.gestionnairedeclefs.HelloApplication
+                                fr.gestionnaire.gestionnairedeclefs/fr.gestionnaire.gestionnairedeclefs.ManagerClefApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
