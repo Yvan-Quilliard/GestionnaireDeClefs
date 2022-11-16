@@ -26,6 +26,48 @@ public class Clef implements MethodeDatabaseObject<Clef> {
         this.description = new SimpleStringProperty(description);
     }
 
+    @Override
+    public List<Clef> getAll(Connection connection) throws SQLException {
+        List<Clef> cache = new ArrayList<Clef>();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM clefs");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            int number = resultSet.getInt("numero");
+            String color = resultSet.getString("couleur");
+            String description = resultSet.getString("description");
+            cache.add(new Clef(id, number, color, description));
+        }
+        return cache.isEmpty() ? null : cache;
+    }
+
+    @Override
+    public void insertObject(Connection connection, Clef... clefs) throws SQLException {
+        for(Clef clef : clefs) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO clefs(numero, couleur, description) VALUES (?, ?, ?)");
+            preparedStatement.setInt(1, clef.getNumber());
+            preparedStatement.setString(2, clef.getColor());
+            preparedStatement.setString(3, clef.getDescription());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void insert(Connection connection) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO clefs(numero, couleur, description) VALUES (?, ?, ?)");
+        preparedStatement.setInt(1, this.getNumber());
+        preparedStatement.setString(2, this.getColor());
+        preparedStatement.setString(3, this.getDescription());
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void delete(Connection connection) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM clefs WHERE id = (?)");
+        preparedStatement.setInt(1, this.getId());
+        preparedStatement.executeUpdate();
+    }
+
     public int getId() {
         return id.get();
     }
@@ -84,18 +126,4 @@ public class Clef implements MethodeDatabaseObject<Clef> {
                 '}';
     }
 
-    @Override
-    public List<Clef> getAll(Connection connection) throws SQLException {
-        List<Clef> cache = new ArrayList<Clef>();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM clefs");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            int number = resultSet.getInt("numero");
-            String color = resultSet.getString("couleur");
-            String description = resultSet.getString("description");
-            cache.add(new Clef(id, number, color, description));
-        }
-        return cache.isEmpty() ? null : cache;
-    }
 }

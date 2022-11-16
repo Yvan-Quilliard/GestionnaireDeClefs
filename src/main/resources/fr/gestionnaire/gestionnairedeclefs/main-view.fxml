@@ -18,8 +18,8 @@
             <HBox.margin>
                <Insets right="5.0" />
             </HBox.margin></Button>
-         <Button mnemonicParsing="false" style="-fx-background-color: green;" text="Ajouter une clef" textFill="WHITE" />
-         <Button mnemonicParsing="false" style="-fx-background-color: red;" text="Supprimer la clef" textFill="WHITE">
+         <Button mnemonicParsing="false" onAction="#onClickBtnAddClef" style="-fx-background-color: green;" text="Ajouter une clef" textFill="WHITE" />
+         <Button mnemonicParsing="false" onAction="#onClickBtnDeleteClef" style="-fx-background-color: red;" text="Supprimer la clef" textFill="WHITE">
             <HBox.margin>
                <Insets left="5.0" />
             </HBox.margin></Button>

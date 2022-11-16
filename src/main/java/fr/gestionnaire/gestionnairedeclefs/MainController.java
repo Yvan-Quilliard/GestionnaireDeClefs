@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    private Connection connection;
+
     @FXML
     private TableView table;
 
@@ -29,6 +31,18 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn colDescription;
 
+    @FXML
+    public void onClickBtnDeleteClef() throws SQLException {
+        Clef clef = new Clef(4, 00001, "VALUE TEST", "VALUE TEST");
+        clef.delete(this.connection);
+    }
+
+    @FXML
+    public void onClickBtnAddClef() throws SQLException {
+        Clef clef = new Clef(4, 00001, "VALUE TEST", "VALUE TEST");
+        clef.insert(this.connection);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.colNumber.setCellValueFactory(new PropertyValueFactory<Clef, String>("number"));
@@ -37,9 +51,8 @@ public class MainController implements Initializable {
 
         final ObservableList<Clef> data = FXCollections.observableArrayList();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", "tpjfx", "tpjfx");
-            new Clef().getAll(connection).forEach(clef -> {
-                System.out.println(clef);
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", "tpjfx", "tpjfx");
+            new Clef().getAll(this.connection).forEach(clef -> {
                 data.add(clef);
             });
         } catch (SQLException e) {
