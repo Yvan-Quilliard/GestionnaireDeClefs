@@ -31,9 +31,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colNumber.setCellValueFactory(new PropertyValueFactory<Clef, String>("number"));
-        colColor.setCellValueFactory(new PropertyValueFactory<Clef, String>("color"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<Clef, String>("description"));
+        this.colNumber.setCellValueFactory(new PropertyValueFactory<Clef, String>("number"));
+        this.colColor.setCellValueFactory(new PropertyValueFactory<Clef, String>("color"));
+        this.colDescription.setCellValueFactory(new PropertyValueFactory<Clef, String>("description"));
 
         final ObservableList<Clef> data = FXCollections.observableArrayList();
         try {
@@ -46,7 +46,7 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        table.setItems(data);
+        this.table.setItems(data);
 
     }
 }
