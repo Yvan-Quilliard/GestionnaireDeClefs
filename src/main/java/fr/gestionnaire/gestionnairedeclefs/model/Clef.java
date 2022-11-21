@@ -19,12 +19,14 @@ public class Clef implements MethodeDatabaseObject<Clef> {
     private SimpleStringProperty description;
 
     public Clef() {}
+
     public Clef(int id, int number, String color, String description) {
         this.id = new SimpleIntegerProperty(id);
         this.number = new SimpleIntegerProperty(number);
         this.color = new SimpleStringProperty(color);
         this.description = new SimpleStringProperty(description);
     }
+
     public Clef(int number, String color, String description) {
         this(0, number, color, description);
     }
@@ -117,6 +119,31 @@ public class Clef implements MethodeDatabaseObject<Clef> {
 
     public void setDescription(String description) {
         this.description.set(description);
+    }
+
+    private String getAllPropertiesFormat() {
+        return new StringBuilder()
+//                .append(this.getNumber())
+                .append(this.getColor())
+                .append(this.getDescription())
+                .toString().replaceAll("\\s+", "");
+    }
+
+    public int getEqualsCaseForString(String in) {
+        int numberCaseEquals = 0;
+        String inFormat = in.toLowerCase();
+        char[] allPropretiesToChar = this.getAllPropertiesFormat().toLowerCase().toCharArray();
+
+        for (char c : inFormat.toCharArray()) {
+            for (int i = 0; i < allPropretiesToChar.length; i++) {
+                if(allPropretiesToChar[i] == c) {
+                    allPropretiesToChar[i] = ' ';
+                    numberCaseEquals++;
+                }
+            }
+        }
+
+        return numberCaseEquals;
     }
 
     @Override
