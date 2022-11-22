@@ -67,6 +67,11 @@ public class Clef implements MethodeDatabaseObject<Clef> {
     }
 
     @Override
+    public boolean exist(Connection connection) throws SQLException {
+        return false;
+    }
+
+    @Override
     public void delete(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM clefs WHERE id = (?)");
         preparedStatement.setInt(1, this.getId());
@@ -123,7 +128,7 @@ public class Clef implements MethodeDatabaseObject<Clef> {
 
     private String getAllPropertiesFormat() {
         return new StringBuilder()
-//                .append(this.getNumber())
+                .append(this.getNumber())
                 .append(this.getColor())
                 .append(this.getDescription())
                 .toString().replaceAll("\\s+", "");

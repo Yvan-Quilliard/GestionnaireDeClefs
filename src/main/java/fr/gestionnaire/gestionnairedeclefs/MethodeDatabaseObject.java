@@ -12,6 +12,8 @@ public interface MethodeDatabaseObject<T> {
 
     void insert(Connection connection) throws SQLException;
 
+    boolean exist(Connection connection) throws SQLException;
+
     void delete(Connection connection) throws SQLException;
 
 }

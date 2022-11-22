@@ -1,7 +1,6 @@
 package fr.gestionnaire.gestionnairedeclefs.controller;
 
 import fr.gestionnaire.gestionnairedeclefs.ManagerClefApplication;
-import fr.gestionnaire.gestionnairedeclefs.comparator.ClefComparator;
 import fr.gestionnaire.gestionnairedeclefs.model.Clef;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -80,25 +74,38 @@ public class MainController implements Initializable {
         List<Clef> sortListClef = new ArrayList<Clef>();
 
         List<Clef> listEqualsNumber = listClefBase.stream().filter(clef ->
-                this.tfSearch.getText().equalsIgnoreCase(String.valueOf(clef.getNumber()))).collect(Collectors.toList());
+                String.valueOf(clef.getNumber()).toLowerCase().startsWith(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
         List<Clef> listEqualsColor = listClefBase.stream().filter(clef ->
-                this.tfSearch.getText().equalsIgnoreCase(clef.getColor())).collect(Collectors.toList());
+                clef.getColor().toLowerCase().startsWith(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
         List<Clef> listEqualsDescription = listClefBase.stream().filter(clef ->
-                this.tfSearch.getText().equalsIgnoreCase(clef.getDescription())).collect(Collectors.toList());
-
-        sortListClef.addAll(listClefBase);
+                clef.getDescription().toLowerCase().startsWith(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
 
         sortListClef.addAll(0, listEqualsDescription);
         sortListClef.addAll(0, listEqualsColor);
         sortListClef.addAll(0, listEqualsNumber);
 
+        List<Clef> listContainNumber = listClefBase.stream().filter(clef ->
+                String.valueOf(clef.getNumber()).toLowerCase().contains(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
+        sortListClef.addAll(0, listContainNumber);
+
+
+        List<Clef> listContainColor = listClefBase.stream().filter(clef ->
+                clef.getColor().toLowerCase().contains(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
+        sortListClef.addAll(0, listContainColor);
+
+
+        List<Clef> listContainDescription = listClefBase.stream().filter(clef ->
+                clef.getDescription().toLowerCase().contains(this.tfSearch.getText().toLowerCase())).collect(Collectors.toList());
+        sortListClef.addAll(0, listContainDescription);
+
+
         List<Clef> listSortFinal = sortListClef.stream().distinct().collect(Collectors.toList());
         ObservableList<Clef> data = FXCollections.observableArrayList();
         listSortFinal.forEach(clef -> data.add(clef));
 
+        Collections.reverse(data);
         this.table.setItems(data);
 
-        this.colorTextInCellBySearchString(this.tfSearch.getText());
     }
 
     @FXML
@@ -146,80 +153,6 @@ public class MainController implements Initializable {
         });
 
         this.table.setItems(data);
-    }
-
-    private void colorTextInCellBySearchString(String textSearch) throws SQLException {
-
-        this.colNumber.setCellFactory(cell -> {
-            return new TableCell<Clef, Integer>() {
-                @Override
-                protected void updateItem(Integer item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if(!empty) {
-                        String itemFormatString = String.valueOf(item).toLowerCase();
-                        String searchFormatString = textSearch.toLowerCase();
-                        if(itemFormatString.contains(searchFormatString)) {
-                            String numberString = String.valueOf(item);
-                            this.setGraphic(buildTextFlowColor(numberString, textSearch));
-                            Double rowHeight = this.getTableRow().getHeight();
-                            this.setHeight(rowHeight);
-                            this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                        }
-                    }
-
-                    if(String.valueOf(item) != "null") {
-                        this.setText(String.valueOf(item));
-                    } else {
-                        this.setText("");
-                        this.setGraphic(null);
-                    }
-                }
-            };
-        });
-
-        for (TableColumn tableColumn : Arrays.asList(this.colColor, this.colDescription)) {
-            tableColumn.setCellFactory(cell -> {
-                return new TableCell<Clef, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if(!empty) {
-                            String itemFormatString = item.toLowerCase();
-                            String searchFormatString = textSearch.toLowerCase();
-                            if(itemFormatString.contains(searchFormatString)) {
-                                this.setGraphic(buildTextFlowColor(item, textSearch));
-                                Double rowHeight = this.getTableRow().getHeight();
-                                this.setHeight(rowHeight);
-                                this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                            }
-                        }
-
-                        if(item != "null" && item != null) {
-                            this.setText(item);
-                        } else {
-                            this.setText("");
-                            this.setGraphic(null);
-                        }
-                    }
-                };
-            });
-        }
-
-    }
-
-    private TextFlow buildTextFlowColor(String text, String search) {
-        Text[] textToChars = new Text[text.length()];
-        for (int i = 0; i < text.toCharArray().length; i++) {
-            for (char charSearch : search.toCharArray()) {
-                Text charTextAdd = new Text(String.valueOf(text.toCharArray()[i]));
-                if((Character.toLowerCase(text.toCharArray()[i]) == Character.toLowerCase(charSearch))) {
-                    charTextAdd.setFill(Color.RED);
-                }
-                textToChars[i] = charTextAdd;
-            }
-        }
-        return new TextFlow(textToChars);
     }
 
 }
