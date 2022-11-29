@@ -36,11 +36,11 @@ public class AuthentificationController implements Initializable {
 
     @FXML
     protected void onClickBtnConnexion() throws IOException, SQLException {
-        String login, password;
-        login = tfLogin.getText();
-        password = pfPassword.getText();
+        String login = tfLogin.getText(), password = pfPassword.getText();
 
-        if(new Auth(login, password).exist(this.connection)) {
+        Auth auth = new Auth(login, password).hashPassword();
+
+        if(auth.exist(this.connection)) {
             Parent root = FXMLLoader.load(ManagerClefApplication.class.getResource("main-view.fxml"));
             Stage window = (Stage) btnConnexion.getScene().getWindow();
             window.setTitle("Gestionnaire de clef");
@@ -65,33 +65,5 @@ public class AuthentificationController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-        String password = "yvan";
-
-        byte[] generateSel = this.digest(password.getBytes());
-
-        String passwordHash = this.bytesToHex(generateSel);
-
-
-    }
-
-    public static byte[] digest(byte[] input) {
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("SHA3-256");
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalArgumentException(e);
-        }
-        byte[] result = md.digest(input);
-        return result;
-    }
-
-    public static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
     }
 }
