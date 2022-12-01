@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Auth implements MethodeDatabaseObject<Auth> {
+public class Auth implements MethodeDatabaseObject<Auth, Integer> {
 
     private String login;
     private String password;
@@ -50,21 +50,6 @@ public class Auth implements MethodeDatabaseObject<Auth> {
     }
 
     @Override
-    public List<Auth> getAll(Connection connection) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public void insertObject(Connection connection, Auth... t) throws SQLException {
-
-    }
-
-    @Override
-    public void insert(Connection connection) throws SQLException {
-
-    }
-
-    @Override
     public boolean exist(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM auth WHERE login = (?) AND password = (?);");
         preparedStatement.setString(1, this.login);
@@ -74,8 +59,15 @@ public class Auth implements MethodeDatabaseObject<Auth> {
     }
 
     @Override
-    public void delete(Connection connection) throws SQLException {
-
-    }
-
+    public void delete(Connection connection) throws SQLException {}
+    @Override
+    public Auth get(Connection connection, Integer t) throws SQLException {return null;}
+    @Override
+    public List<Auth> getAll(Connection connection) throws SQLException {return null;}
+    @Override
+    public void insertObject(Connection connection, Auth... t) throws SQLException {}
+    @Override
+    public void insert(Connection connection) throws SQLException {}
+    @Override
+    public void update(Connection connection) throws SQLException {}
 }

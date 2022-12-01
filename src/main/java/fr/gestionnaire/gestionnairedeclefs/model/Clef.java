@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Clef implements MethodeDatabaseObject<Clef> {
+public class Clef implements MethodeDatabaseObject<Clef, Integer> {
 
     private SimpleIntegerProperty id;
     private SimpleIntegerProperty number;
@@ -29,6 +29,20 @@ public class Clef implements MethodeDatabaseObject<Clef> {
 
     public Clef(int number, String color, String description) {
         this(0, number, color, description);
+    }
+
+    @Override
+    public Clef get(Connection connection, Integer t) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM clefs WHERE id = (?)");
+        preparedStatement.setInt(1, t);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int id = resultSet.getInt("id");
+        int number = resultSet.getInt("numero");
+        String color = resultSet.getString("couleur");
+        String description = resultSet.getString("description");
+
+        return new Clef(id, number, color, description);
     }
 
     @Override
@@ -67,16 +81,25 @@ public class Clef implements MethodeDatabaseObject<Clef> {
     }
 
     @Override
-    public boolean exist(Connection connection) throws SQLException {
-        return false;
-    }
-
-    @Override
     public void delete(Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM clefs WHERE id = (?)");
         preparedStatement.setInt(1, this.getId());
         preparedStatement.executeUpdate();
     }
+
+    @Override
+    public void update(Connection connection) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE clefs SET numero= (?), couleur= (?), description= (?) WHERE id=(?)");
+        preparedStatement.setInt(1, this.getNumber());
+        preparedStatement.setString(2, this.getColor());
+        preparedStatement.setString(3, this.getDescription());
+        preparedStatement.setInt(4, this.getId());
+
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public boolean exist(Connection connection) throws SQLException {return false;}
 
     public int getId() {
         return id.get();
@@ -124,31 +147,6 @@ public class Clef implements MethodeDatabaseObject<Clef> {
 
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    private String getAllPropertiesFormat() {
-        return new StringBuilder()
-                .append(this.getNumber())
-                .append(this.getColor())
-                .append(this.getDescription())
-                .toString().replaceAll("\\s+", "");
-    }
-
-    public int getEqualsCaseForString(String in) {
-        int numberCaseEquals = 0;
-        String inFormat = in.toLowerCase();
-        char[] allPropretiesToChar = this.getAllPropertiesFormat().toLowerCase().toCharArray();
-
-        for (char c : inFormat.toCharArray()) {
-            for (int i = 0; i < allPropretiesToChar.length; i++) {
-                if(allPropretiesToChar[i] == c) {
-                    allPropretiesToChar[i] = ' ';
-                    numberCaseEquals++;
-                }
-            }
-        }
-
-        return numberCaseEquals;
     }
 
     @Override

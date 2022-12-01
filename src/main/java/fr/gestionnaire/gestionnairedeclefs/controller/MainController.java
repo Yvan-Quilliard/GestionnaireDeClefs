@@ -41,6 +41,9 @@ public class MainController implements Initializable {
     private Button btnAddClef;
 
     @FXML
+    private Button btnEditClef;
+
+    @FXML
     private TextField tfSearch;
 
     @Override
@@ -118,9 +121,30 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    public void onClickBtnEditClef() throws IOException {
+        Clef currentClef = (Clef) this.table.getSelectionModel().getSelectedItem();
+        if(currentClef == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur !");
+            alert.setHeaderText("Modification impossible");
+            alert.setContentText("Sélectionner une clef pour la modifier !");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(ManagerClefApplication.class.getResource("edit-clef-view.fxml"));
+        fxmlLoader.setController(new EditClefController(currentClef));
+        Parent root = fxmlLoader.load();
+        Stage window = (Stage) btnAddClef.getScene().getWindow();
+        window.setTitle("Modifier une clef");
+        window.setScene(new Scene(root));
+        window.centerOnScreen();
+    }
+
+    @FXML
     public void onClickBtnDeleteClef() throws SQLException {
-        Clef clefSelect = (Clef) this.table.getSelectionModel().getSelectedItem();
-        if(clefSelect == null) {
+        Clef currentClef = (Clef) this.table.getSelectionModel().getSelectedItem();
+        if(currentClef == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur !");
             alert.setHeaderText("Suppression impossible");
@@ -132,15 +156,15 @@ public class MainController implements Initializable {
         Alert alertDeleteClef = new Alert(Alert.AlertType.CONFIRMATION);
         alertDeleteClef.setTitle("Attention !");
         alertDeleteClef.setHeaderText("Confirmation de suppression");
-        alertDeleteClef.setContentText("Êtes-vous sur de vouloir supprimer la clef numéro " + clefSelect.getNumber() + " ?");
+        alertDeleteClef.setContentText("Êtes-vous sur de vouloir supprimer la clef numéro " + currentClef.getNumber() + " ?");
         Optional<ButtonType> resultAlertDeleteClef = alertDeleteClef.showAndWait();
 
         if(resultAlertDeleteClef.get().equals(ButtonType.OK)) {
-            clefSelect.delete(this.connection);
+            currentClef.delete(this.connection);
             Alert alertInformDeleteClef = new Alert(Alert.AlertType.INFORMATION);
             alertInformDeleteClef.setTitle("Information");
             alertInformDeleteClef.setHeaderText(null);
-            alertInformDeleteClef.setContentText("Vous avez bien supprimer la clef numéro " + clefSelect.getNumber() + ".");
+            alertInformDeleteClef.setContentText("Vous avez bien supprimer la clef numéro " + currentClef.getNumber() + ".");
             alertInformDeleteClef.show();
             this.initTableView();
         }
