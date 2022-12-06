@@ -68,8 +68,9 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void onClickBtnSearch() throws SQLException {
-        if(this.tfSearch.getText() == "null" || this.tfSearch.getText() == null || this.tfSearch.getText() == "") {
+    public void tfSearchKeyPress() throws SQLException {
+        if(this.tfSearch.getText() == null || this.tfSearch.getText().equals("")) {
+            this.initTableView();
             return;
         };
 
@@ -106,9 +107,7 @@ public class MainController implements Initializable {
         ObservableList<Clef> data = FXCollections.observableArrayList();
         listSortFinal.forEach(clef -> data.add(clef));
 
-        Collections.reverse(data);
         this.table.setItems(data);
-
     }
 
     @FXML
@@ -135,7 +134,7 @@ public class MainController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(ManagerClefApplication.class.getResource("edit-clef-view.fxml"));
         fxmlLoader.setController(new EditClefController(currentClef));
         Parent root = fxmlLoader.load();
-        Stage window = (Stage) btnAddClef.getScene().getWindow();
+        Stage window = (Stage) btnEditClef.getScene().getWindow();
         window.setTitle("Modifier une clef");
         window.setScene(new Scene(root));
         window.centerOnScreen();
@@ -172,9 +171,7 @@ public class MainController implements Initializable {
 
     private void initTableView() throws SQLException {
         ObservableList<Clef> data = FXCollections.observableArrayList();
-        new Clef().getAll(this.connection).forEach(clef -> {
-            data.add(clef);
-        });
+        data.addAll(0, new Clef().getAll(connection));
 
         this.table.setItems(data);
     }

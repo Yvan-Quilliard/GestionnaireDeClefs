@@ -10,11 +10,11 @@
     </padding>
    <HBox>
       <children>
-         <TextField fx:id="tfSearch" promptText="Numéro de clef, etc..." style="-fx-background-radius: 2px;">
+         <TextField fx:id="tfSearch" onKeyPressed="#tfSearchKeyPress" promptText="Numéro de clef, etc..." style="-fx-background-radius: 2px;">
             <HBox.margin>
                <Insets right="5.0" />
             </HBox.margin></TextField>
-         <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onClickBtnSearch" style="-fx-background-color: blue;" text="Rechercher" textFill="WHITE">
+         <Button fx:id="btnSearch" mnemonicParsing="false" style="-fx-background-color: blue;" text="Rechercher" textFill="WHITE">
             <HBox.margin>
                <Insets right="5.0" />
             </HBox.margin></Button>
