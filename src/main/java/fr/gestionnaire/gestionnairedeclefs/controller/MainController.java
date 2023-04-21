@@ -172,7 +172,6 @@ public class MainController implements Initializable {
     private void initTableView() throws SQLException {
         ObservableList<Clef> data = FXCollections.observableArrayList();
         data.addAll(0, new Clef().getAll(connection));
-
         this.table.setItems(data);
     }
 

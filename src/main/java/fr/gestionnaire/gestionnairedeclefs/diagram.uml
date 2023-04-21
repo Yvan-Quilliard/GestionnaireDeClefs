@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="45.40124128769935" y="190.04451113182412">fr.gestionnaire.gestionnairedeclefs.MethodeDatabaseObject</node>
+    <node x="45.12524533898498" y="310.28923152594643">fr.gestionnaire.gestionnairedeclefs.ManagerClefApplication</node>
+    <node x="198.90775186414498" y="399.63127680400424">fr.gestionnaire.gestionnairedeclefs.controller.EditClefController</node>
+    <node x="1.1360439021696607" y="-14.24445760517363">fr.gestionnaire.gestionnairedeclefs.controller.AddClefController</node>
+    <node x="-214.49602262178774" y="388.29021106486636">fr.gestionnaire.gestionnairedeclefs.controller.MainController</node>
+    <node x="-148.76687100956053" y="193.15540763700844">fr.gestionnaire.gestionnairedeclefs.model.Auth</node>
+    <node x="484.0500621045833" y="279.731527942138">fr.gestionnaire.gestionnairedeclefs.model.Clef</node>
+    <node x="347.91252070603815" y="9.980943069504143">fr.gestionnaire.gestionnairedeclefs.controller.AuthentificationController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.controller.MainController" target="fr.gestionnaire.gestionnairedeclefs.model.Clef" relationship="CREATE">
+      <point x="99.50002262178774" y="-2.1106486633470922E-4" />
+      <point x="27.625" y="492.29" />
+      <point x="27.625" y="250.0" />
+      <point x="595.55" y="250.0" />
+      <point x="-6.210458326449952E-5" y="-59.99952794213797" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.controller.AuthentificationController" target="fr.gestionnaire.gestionnairedeclefs.model.Auth" relationship="CREATE">
+      <point x="0.0" y="-60.0" />
+      <point x="459.91252070603815" y="-31.744457605173636" />
+      <point x="-82.26687100956053" y="-31.744457605173636" />
+      <point x="0.0" y="-38.0" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.controller.AddClefController" target="fr.gestionnaire.gestionnairedeclefs.model.Clef" relationship="CREATE">
+      <point x="-60.235043902169664" y="71.00045760517364" />
+      <point x="27.900999999999996" y="250.0" />
+      <point x="595.55" y="250.0" />
+      <point x="-6.210458326449952E-5" y="-59.99952794213797" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.controller.EditClefController" target="fr.gestionnaire.gestionnairedeclefs.model.Clef" relationship="TO_ONE">
+      <point x="87.0" y="0.0" />
+      <point x="595.5500621045833" y="481.63127680400424" />
+      <point x="0.0" y="60.0" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.controller.MainController" target="fr.gestionnaire.gestionnairedeclefs.controller.EditClefController" relationship="CREATE">
+      <point x="99.5" y="14.999788935133665" />
+      <point x="-87.0" y="25.658723195995776" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.model.Clef" target="fr.gestionnaire.gestionnairedeclefs.MethodeDatabaseObject" relationship="REALIZATION">
+      <point x="14.999937895416736" y="-59.99952794213797" />
+      <point x="610.55" y="235.0" />
+      <point x="259.901" y="235.0" />
+      <point x="-2.4128769933895455E-4" y="14.500488868175864" />
+    </edge>
+    <edge source="fr.gestionnaire.gestionnairedeclefs.model.Auth" target="fr.gestionnaire.gestionnairedeclefs.MethodeDatabaseObject" relationship="REALIZATION">
+      <point x="66.49987100956054" y="23.344592362991563" />
+      <point x="12.625" y="254.5" />
+      <point x="12.625" y="235.0" />
+      <point x="259.901" y="235.0" />
+      <point x="-2.4128769933895455E-4" y="14.500488868175864" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.9691833590138675" showDependencies="true" x="256.5000000000001" y="292.50000000000006" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

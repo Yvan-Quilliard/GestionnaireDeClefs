@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 15 nov. 2022 à 16:24
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Généré le : ven. 21 avr. 2023 à 10:02
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `auth`;
 CREATE TABLE IF NOT EXISTS `auth` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(500) NOT NULL,
-  `password` varchar(500) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `login` varchar(1000) NOT NULL,
+  `password` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `auth`
+--
+
+INSERT INTO `auth` (`id`, `login`, `password`) VALUES
+(1, 'yvan', 'a548817d31ca8feba6324e4eb3eec6537d12d578f7ee08dd330edb8e8094bcaa');
 
 -- --------------------------------------------------------
 
@@ -43,12 +50,19 @@ CREATE TABLE IF NOT EXISTS `auth` (
 
 DROP TABLE IF EXISTS `clefs`;
 CREATE TABLE IF NOT EXISTS `clefs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numero` int(11) NOT NULL,
-  `couleur` varchar(100) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numero` int NOT NULL,
+  `couleur` varchar(1000) NOT NULL,
   `description` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `clefs`
+--
+
+INSERT INTO `clefs` (`id`, `numero`, `couleur`, `description`) VALUES
+(1, 108436, 'Rouge', 'Porte salon');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
