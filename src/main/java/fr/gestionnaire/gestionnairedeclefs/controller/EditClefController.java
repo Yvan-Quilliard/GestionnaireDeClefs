@@ -1,5 +1,6 @@
 package fr.gestionnaire.gestionnairedeclefs.controller;
 
+import fr.gestionnaire.gestionnairedeclefs.Config;
 import fr.gestionnaire.gestionnairedeclefs.ManagerClefApplication;
 import fr.gestionnaire.gestionnairedeclefs.model.Clef;
 import javafx.fxml.FXML;
@@ -46,7 +47,7 @@ public class EditClefController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", "tpjfx", "tpjfx");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", Config.dbUser, Config.dbPassword);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

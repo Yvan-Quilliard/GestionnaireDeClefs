@@ -1,5 +1,6 @@
 package fr.gestionnaire.gestionnairedeclefs.controller;
 
+import fr.gestionnaire.gestionnairedeclefs.Config;
 import fr.gestionnaire.gestionnairedeclefs.ManagerClefApplication;
 import fr.gestionnaire.gestionnairedeclefs.model.Auth;
 import javafx.fxml.FXML;
@@ -59,7 +60,7 @@ public class AuthentificationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", "tpjfx", "tpjfx");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tpjfx", Config.dbUser, Config.dbPassword);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
